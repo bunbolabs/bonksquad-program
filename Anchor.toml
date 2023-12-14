@@ -1,0 +1,17 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+bonksquad = "8CSHoaVnrsi9TZJd6kw3ihJ5B2baAHQCqScuWHrX2hnb"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+client = "yarn run ts-node client/*.ts"
