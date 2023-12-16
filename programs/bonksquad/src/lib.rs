@@ -11,7 +11,7 @@ mod bonksquad {
         squad_account.level = 1;
         squad_account.score = 0;
         squad_account.xp = 0;
-        squad_account.owner = ctx.accounts.signer.key();
+        squad_account.founder = ctx.accounts.signer.key();
 
         Ok(())
     }
@@ -108,7 +108,7 @@ pub struct Squad {
     score: u16,
     badge: String,
     xp: u16,
-    owner: Pubkey,
+    founder: Pubkey,
 }
 
 #[account]
