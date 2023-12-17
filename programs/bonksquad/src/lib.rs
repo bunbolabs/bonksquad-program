@@ -26,6 +26,10 @@ mod bonksquad {
         Ok(())
     }
 
+    pub fn close_user(ctx: Context<CloseUser>) -> Result<()> {
+        Ok(())
+    }
+
     pub fn create_quest(
         ctx: Context<CreateQuest>,
         id: u16,
@@ -52,7 +56,22 @@ pub struct CreateSquad<'info> {
         payer = signer,
         space = 8 + 4 + 200 + 2 + 2 + 4 + 200 + 2, 
         seeds = [b"create-squad", signer.key().as_ref()], 
-        bump
+        bump,
+    )]
+    pub squad_account: Account<'info, Squad>,
+
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct CloseSquad<'info> {
+    #[account(
+        mut,
+        close = signer,
+        seeds = [b"create-squad", signer.key().as_ref()], 
+        bump,
     )]
     pub squad_account: Account<'info, Squad>,
 
@@ -68,7 +87,22 @@ pub struct CreateUser<'info> {
         payer = signer,
         space = 8 + 4 + 200 + 2 + 2 + 4 + 200 + 2, 
         seeds = [b"create-user", signer.key().as_ref()], 
-        bump
+        bump,
+    )]
+    pub user_account: Account<'info, User>,
+
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct CloseUser<'info> {
+    #[account(
+        mut,
+        close = signer,
+        seeds = [b"create-user", signer.key().as_ref()], 
+        bump,
     )]
     pub user_account: Account<'info, User>,
 
