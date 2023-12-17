@@ -16,6 +16,10 @@ mod bonksquad {
         Ok(())
     }
 
+    pub fn close_squad(ctx: Context<CloseSquad>) -> Result<()> {
+        Ok(())
+    }
+
     pub fn create_user(ctx: Context<CreateUser>, name: String) -> Result<()> {
         let user_account = &mut ctx.accounts.user_account;
         user_account.name = name;
