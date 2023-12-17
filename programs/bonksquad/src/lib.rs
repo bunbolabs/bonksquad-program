@@ -36,21 +36,18 @@ mod bonksquad {
 
     pub fn create_quest(
         ctx: Context<CreateQuest>,
-        id: u16,
-        kind: u8,
         score: u16,
         parent: Pubkey,
         quality: u8,
     ) -> Result<()> {
         let quest_account = &mut ctx.accounts.quest_account;
-        quest_account.id = id;
-        quest_account.kind = kind;
         quest_account.score = score;
         quest_account.parent = parent;
         quest_account.quality = quality;
 
         Ok(())
     }
+
 }
 
 #[derive(Accounts)]
@@ -120,7 +117,7 @@ pub struct CreateQuest<'info> {
     #[account(
         init,
         payer = signer,
-        space = 8 + 2 + 1 + 2 + 32 + 1,
+        space = 8  + 2 + 32 + 1,
     )]
     pub quest_account: Account<'info, Quest>,
 
@@ -151,8 +148,6 @@ pub struct Squad {
 
 #[account]
 pub struct Quest {
-    id: u16,
-    kind: u8,
     score: u16,
     parent: Pubkey,
     quality: u8,
